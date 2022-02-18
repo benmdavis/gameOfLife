@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Model {
@@ -15,18 +16,9 @@ public class Model {
         cells = new boolean[rows * cols];
     }
 
-    public void run()  {
+    public void run() throws Exception {
         cycle();
         textDisplay();
-        //        System.out.println("17");
-//        ActionListener loop = new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                cycle();
-//                textDisplay();
-//                }
-//            };
-//        Timer t = new Timer(400, loop);
-//        t.start();
     }
 
     public void reset() {
@@ -57,7 +49,7 @@ public class Model {
         System.out.print(s.toString());
     }
 
-    private void cycle() {
+    private void cycle() throws  Exception {
         boolean[] temp = new boolean[rows*cols];
         for (int i = 0; i < cells.length; i++) {
             int neighbors = neighborCount(neighbors(i));
@@ -67,6 +59,7 @@ public class Model {
             else if (neighbors == 3 && !cells[i]) temp[i] = true;
             else if (neighbors > 3) temp[i] = false;
         }
+        if(Arrays.equals(cells, temp)) throw new Exception("End State");
         cells = temp;
     }
 

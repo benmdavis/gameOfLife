@@ -32,10 +32,15 @@ public class Controller {
     }
 
     private void start()  {
-        ActionListener loop = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        ActionListener loop = e -> {
+            try {
                 model.run();
                 update();
+
+            } catch (Exception exception) {
+                if(exception.getMessage() == "End State") endState();
+                else exception.printStackTrace();
+
             }
         };
         t = new Timer(400, loop);
@@ -43,11 +48,17 @@ public class Controller {
     }
 
     private void reset() {
-        t.stop();
+        try {
+            t.stop();
+        } catch (Exception ignored) {
+        }
         model.reset();
         update();
     }
+    private void endState() {
+        t.stop();
 
+    }
     private void update() {
         for (int i = 0; i < model.rows * model.cols; i++) {
             if (model.cellValue(i)) view.setButton(i, true);
