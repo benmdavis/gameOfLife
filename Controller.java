@@ -27,6 +27,7 @@ public class Controller {
 
             });
         }
+        update();
     }
 
     private void start()  {

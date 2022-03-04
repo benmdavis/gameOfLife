@@ -2,9 +2,12 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class Model {
     private boolean[] cells;
@@ -14,6 +17,25 @@ public class Model {
         this.rows = r;
         this.cols = c;
         cells = new boolean[rows * cols];
+    }
+
+    public Model(String filename) {
+        try {
+            File input = new File(filename);
+            Scanner reader = new Scanner(input);
+            this.rows = reader.nextInt();
+            this.cols = reader.nextInt();
+            cells = new boolean[rows*cols];
+            for(int i = 0; i < rows; i++) {
+                for(int j = 0; j < rows; j++) {
+                    if(reader.nextInt() == 1) cells[i*cols + j] = true;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+        }
+        textDisplay();
     }
 
     public void run() throws Exception {
