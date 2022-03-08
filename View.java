@@ -38,6 +38,7 @@ public class View {
             temp.putClientProperty("idx", i);
             temp.setBackground(Color.WHITE);
             temp.setOpaque(true);
+            temp.setSize(10,10);
             buttons[i] = temp;
             main.add(temp);
         }
@@ -56,6 +57,12 @@ public class View {
         controls.add(updateButton);
 
         frame.add(controls, BorderLayout.SOUTH);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+//
+//        int width = (int) Math.min(cols*50, size.getWidth());
+//        int height = (int) Math.min( (rows + 1) * 50, size.getHeight());
+//        frame.setSize(width, height);
         frame.setVisible(true);
 
     }
@@ -93,6 +100,7 @@ public class View {
     }
 
     public void changeSettings(int newRows, int newCols) {
+        frame.setVisible(false);
         rows = newRows;
         cols = newCols;
 
@@ -107,6 +115,7 @@ public class View {
             temp.putClientProperty("idx", i);
             temp.setBackground(Color.WHITE);
             temp.setOpaque(true);
+            temp.setSize(10,10);
             buttons[i] = temp;
             main.add(temp);
         }
@@ -114,8 +123,12 @@ public class View {
         main.setLayout(new GridLayout(rows,cols));
 
         frame.add(main, BorderLayout.CENTER);
-        frame.setSize((rows + 1)*50,cols*50);
-
+//        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+//        int width = (int) Math.min(cols*50, size.getWidth());
+//        int height = (int) Math.min( (rows + 1) * 50, size.getHeight());
+//        frame.setSize(width, height);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setVisible(true);
         frame.repaint();
     }
 }

@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +27,10 @@ public class Model {
             cells = new boolean[rows*cols];
             for(int i = 0; i < rows; i++) {
                 for(int j = 0; j < rows; j++) {
-                    if(reader.nextInt() == 1) cells[i*cols + j] = true;
+                    System.out.println(i + ", " + j);
+                    if(reader.nextInt() == 1) {
+                        cells[i*cols + j] = true;
+                    }
                 }
             }
         } catch (FileNotFoundException e) {
